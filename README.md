@@ -30,18 +30,13 @@ Aplikasi mobile berbasis **Android** yang dikembangkan menggunakan **Kotlin**, *
 ## 3. Screenshot & GIF Aplikasi
 
 ### Tangkapan Layar Aplikasi
-| Home Screen (Grid & Pencarian) | Detail Screen (Sinopsis & Info) |
+
+| Home Screen | Detail Screen |
 | :---: | :---: |
-| <img src="app/ss/1.jpeg" width="260" alt="Home Screen Grid AniKatsu" /> | <img src="app/ss/2.jpeg" width="260" alt="Detail Screen AniKatsu" /> |
-| *Tampilan grid 2 kolom, search bar, & filter genre* | *Header banner sinematik, info badge, genre, & sinopsis* |
+| ![Home Screen](app/ss/1.jpeg) | ![Detail Screen](app/ss/2.jpeg) |
+| *Tampilan Grid 2 Kolom, Search Bar, & Filter Genre* | *Header Banner Sinematik, Info Badge, & Sinopsis* |
 
-### Demo Interaksi (GIF)
-| Alur Interaksi & Transisi Layar |
-| :---: |
-| <img src="app/ss/demo.gif" width="280" alt="Demo Interaksi Aplikasi AniKatsu" onerror="this.onerror=null; this.src='app/ss/1.jpeg';" /> |
-| *Navigasi Home Screen -> Pencarian/Filter -> Detail Screen -> Kembali* |
-
-> *Catatan: File tangkapan layar tersimpan pada direktori [`app/ss/`](app/ss/) (`1.jpeg` dan `2.jpeg`).*
+> *Tangkapan layar tersimpan pada folder `app/ss/` (`1.jpeg` dan `2.jpeg`).*
 
 ---
 
