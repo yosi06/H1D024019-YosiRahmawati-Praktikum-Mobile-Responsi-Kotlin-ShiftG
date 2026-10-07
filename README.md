@@ -29,14 +29,16 @@ Aplikasi mobile berbasis **Android** yang dikembangkan menggunakan **Kotlin**, *
 
 ## 3. Screenshot & GIF Aplikasi
 
-### Tangkapan Layar Aplikasi
+### 1. Home Screen (Grid & Pencarian)
+![Home Screen](app/ss/1.jpeg)
 
-| Home Screen | Detail Screen |
-| :---: | :---: |
-| ![Home Screen](app/ss/1.jpeg) | ![Detail Screen](app/ss/2.jpeg) |
-| *Tampilan Grid 2 Kolom, Search Bar, & Filter Genre* | *Header Banner Sinematik, Info Badge, & Sinopsis* |
+*Tampilan katalog anime 2 kolom, search bar, dan filter chip genre.*
 
-> *Tangkapan layar tersimpan pada folder `app/ss/` (`1.jpeg` dan `2.jpeg`).*
+### 2. Detail Screen (Informasi & Sinopsis)
+![Detail Screen](app/ss/2.jpeg)
+
+*Tampilan header sinematik, rating bintang, jumlah episode, status penayangan, genre, dan sinopsis lengkap.*
+
 
 ---
 
