@@ -1,227 +1,190 @@
-# AniKatsu 🎌
+# AniKatsu - Aplikasi Katalog & Pencarian Anime
 
-Aplikasi katalog dan pencarian anime modern berbasis Android yang dibangun dengan **Kotlin**, **Jetpack Compose**, **Material Design 3**, dan **Arsitektur MVVM (Model-View-ViewModel)**.
-
----
-
-## 📋 Daftar Isi
-1. [Nama Aplikasi](#-nama-aplikasi)
-2. [Deskripsi Singkat Aplikasi](#-deskripsi-singkat-aplikasi)
-3. [Screenshot & GIF Aplikasi](#-screenshot--gif-aplikasi)
-4. [Penjelasan Struktur MVVM](#-penjelasan-struktur-mvvm)
-5. [Penjelasan Penggunaan API](#-penjelasan-penggunaan-api)
-6. [Fitur Unggulan](#-fitur-unggulan)
-7. [Struktur Direktori Proyek](#-struktur-direktori-proyek)
-8. [Cara Menjalankan Aplikasi](#-cara-menjalankan-aplikasi)
+Aplikasi mobile berbasis **Android** yang dikembangkan menggunakan **Kotlin**, **Jetpack Compose**, **Material Design 3**, **Navigation Component**, dan **Arsitektur MVVM (Model-View-ViewModel)**. Aplikasi ini memungkinkan pengguna untuk mencari katalog anime, memfilter berdasarkan genre, serta melihat informasi detail anime secara dinamis dari **Tenrai REST API** (`https://api.tenrai.org/v1/`).
 
 ---
 
-## 🏷️ Nama Aplikasi
+## 1. Nama Aplikasi
 
 **AniKatsu** *(Anime Catalog & Discovery App)*
 
 - **Package Name**: `com.pemmob.responsikotlinshiftg`
-- **Platform**: Android (Min SDK 24, Target SDK 35, Compile SDK 35 / 37.1)
-- **Bahasa**: Kotlin (JVM Toolchain 17 / 21)
+- **Platform**: Android (Min SDK 24, Target SDK 35)
+- **Bahasa**: Kotlin
 - **UI Framework**: Jetpack Compose + Material Design 3
 
 ---
 
-## 📝 Deskripsi Singkat Aplikasi
+## 2. Deskripsi Singkat Aplikasi
 
-**AniKatsu** adalah aplikasi penjelajah anime yang dirancang untuk memberikan pengalaman pengguna yang cepat, responsif, dan elegan. Aplikasi ini memungkinkan pengguna untuk:
-- Menjelajahi katalog anime populer secara dinamis dalam bentuk *grid responsif* 2 kolom.
-- Mencari anime berdasarkan judul dengan fitur *real-time search debounce* (500 ms) untuk menghemat konsumsi kuota data dan beban request ke server.
-- Memfilter anime berdasarkan genre pilihan (seperti Action, Adventure, Fantasy, Comedy, Romance, dll.) menggunakan *Filter Chips* horizontal.
-- Melihat rincian mendalam pada setiap anime: poster resolusi tinggi dengan efek *sinematik blur header*, skor rating bintang, jumlah episode, status penayangan, genre tagar (`FlowRow`), informasi musim dan studio produksi, hingga sinopsis lengkap.
-- Mengakses aplikasi dengan antarmuka bertema gelap (*Dark Mode*) yang nyaman di mata dengan aksen warna *Coral Red*, *Teal*, dan *Sunset Gold*, serta tipografi modern dari keluarga font **Poppins**.
-
----
-
-## 📸 Screenshot & GIF Aplikasi
-
-| Home Screen | Detail Screen | Demo Interaksi (GIF) |
-| :---: | :---: | :---: |
-| <img src="docs/screenshots/home_screen.png" width="240" alt="Home Screen AniKatsu" /> | <img src="docs/screenshots/detail_screen.png" width="240" alt="Detail Screen AniKatsu" /> | <img src="docs/screenshots/demo.gif" width="240" alt="Demo Animasi AniKatsu" /> |
-| *Katalog anime, search bar, & filter genre* | *Banner sinematik, info rating, genre, & sinopsis* | *Animasi pencarian, filter, dan transisi layar* |
-
-> **Catatan Pengujian:**  
-> File gambar dapat ditempatkan pada folder [`docs/screenshots/`](docs/screenshots/) dengan nama `home_screen.png`, `detail_screen.png`, dan `demo.gif`.
+**AniKatsu** adalah aplikasi penjelajah anime modern yang memberikan pengalaman pengguna yang cepat, bersih, dan responsif. Fitur utama aplikasi meliputi:
+- **Katalog Anime Populer**: Menampilkan daftar anime dalam bentuk *LazyVerticalGrid* 2 kolom responsif.
+- **Pencarian Real-Time (Debounce)**: Fitur pencarian judul anime dengan debounce 500ms di `HomeViewModel` untuk efisiensi request ke server.
+- **Filter Genre Dinamis**: Filter kategori anime (*Action*, *Adventure*, *Fantasy*, *Comedy*, dll.) menggunakan *Filter Chips* horizontal yang terhubung langsung ke API.
+- **Rincian Anime Mendalam**: Halaman detail dengan banner sinematik blur gradien, poster mengambang, rating skor bintang, jumlah episode, status tayang, genre (*FlowRow*), informasi studio, musim rilis, serta sinopsis lengkap.
+- **Desain Modern & Dark Theme**: Menggunakan tema gelap (*Dark Mode*) dengan aksen *Coral Primary*, *Teal*, *Sunset Gold*, dan tipografi kustom dari keluarga font **Poppins**.
+- **Icon Aplikasi Kustom**: Menggunakan icon karakter anime unik pada seluruh densitas mipmap.
 
 ---
 
-## 🏛️ Penjelasan Struktur MVVM
+## 3. Screenshot & GIF Aplikasi
 
-Aplikasi ini menerapkan pola arsitektur **MVVM (Model-View-ViewModel)** dengan prinsip pemisahan tanggung jawab (*Separation of Concerns*) dan *Unidirectional Data Flow (UDF)*:
+### Tangkapan Layar Aplikasi
+| Home Screen (Grid & Pencarian) | Detail Screen (Sinopsis & Info) |
+| :---: | :---: |
+| <img src="app/ss/1.jpeg" width="260" alt="Home Screen Grid AniKatsu" /> | <img src="app/ss/2.jpeg" width="260" alt="Detail Screen AniKatsu" /> |
+| *Tampilan grid 2 kolom, search bar, & filter genre* | *Header banner sinematik, info badge, genre, & sinopsis* |
+
+### Demo Interaksi (GIF)
+| Alur Interaksi & Transisi Layar |
+| :---: |
+| <img src="app/ss/demo.gif" width="280" alt="Demo Interaksi Aplikasi AniKatsu" onerror="this.onerror=null; this.src='app/ss/1.jpeg';" /> |
+| *Navigasi Home Screen -> Pencarian/Filter -> Detail Screen -> Kembali* |
+
+> *Catatan: File tangkapan layar tersimpan pada direktori [`app/ss/`](app/ss/) (`1.jpeg` dan `2.jpeg`).*
+
+---
+
+## 4. Penjelasan Struktur MVVM
+
+Aplikasi ini menerapkan pola arsitektur **MVVM (Model-View-ViewModel)** dengan pemisahan peran yang jelas (*Separation of Concerns*):
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                    VIEW (Jetpack Compose UI)                    │
-│   HomeScreen, DetailScreen, AnimeCard, StateViews, Theme, Nav   │
-└───────────────────────────────┬─────────────────────────────────┘
-                                │ 1. Mengamati UiState (StateFlow)
-                                │ 2. Mengirim User Event (Lambda)
-                                ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                           VIEWMODEL                             │
-│               HomeViewModel & DetailViewModel                   │
-│   - Memegang Single Source of Truth via MutableStateFlow        │
-│   - Menjalankan Coroutines pada viewModelScope                  │
-│   - Menerapkan Debounce Search (delay 500ms)                    │
-│   - Menangani SavedStateHandle untuk navigasi berargumen        │
-└───────────────────────────────┬─────────────────────────────────┘
-                                │ Memanggil suspend function
-                                ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                           REPOSITORY                            │
-│                        AnimeRepository                          │
-│   - Mengabstraksi sumber data (Single Source of Truth)          │
-│   - Memindahkan thread ke Dispatchers.IO                        │
-│   - Menangkap error dengan runCatching -> Result<T>             │
-└───────────────────────────────┬─────────────────────────────────┘
-                                │ Permintaan HTTP Network
-                                ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                   DATA LAYER (Remote & Model)                   │
-│   - TenraiApiService (Retrofit REST Interface)                  │
-│   - ApiClient (OkHttpClient + Logging Interceptor + Timeout)    │
-│   - Model/DTO (Anime, AnimeImages, Genre, Studio, Response)     │
-└─────────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────┐
+│                   UI / Composable                      │
+│      (HomeScreen, DetailScreen, AnimeCard, dll.)       │
+└──────────────────────────┬─────────────────────────────┘
+                           │ Mengamati State & Kirim Event
+                           ▼
+┌────────────────────────────────────────────────────────┐
+│                      ViewModel                         │
+│           (HomeViewModel, DetailViewModel)             │
+│        - Mengelola UI State (StateFlow)                │
+│        - Menjalankan Coroutines (viewModelScope)       │
+│        - Logika Debounce Pencarian (500ms)             │
+└──────────────────────────┬─────────────────────────────┘
+                           │ Memanggil fungsi suspend
+                           ▼
+┌────────────────────────────────────────────────────────┐
+│                     Repository                         │
+│                  (AnimeRepository)                     │
+│        - Single Source of Truth bagi ViewModel         │
+│        - Menjalankan operasi pada Dispatchers.IO       │
+│        - Mengembalikan Result<T>                       │
+└──────────────────────────┬─────────────────────────────┘
+                           │ Request HTTP via Retrofit
+                           ▼
+┌────────────────────────────────────────────────────────┐
+│                    Data & Remote                       │
+│     - Model / Data Class (Anime, Genre, Response)      │
+│     - TenraiApiService (Retrofit Interface)            │
+│     - ApiClient (OkHttpClient + Base URL Tenrai)       │
+└────────────────────────────────────────────────────────┘
 ```
 
-### 1. Model (Data Layer)
-- Terletak di paket `data.model` ([`Anime.kt`](app/src/main/java/com/pemmob/responsikotlinshiftg/data/model/Anime.kt)).
-- Menggunakan **Kotlin Data Class** untuk memodelkan struktur payload JSON dari API secara *type-safe*.
-- Menggunakan anotasi `@SerializedName` dari Gson untuk memetakan nama field JSON ke variabel Kotlin.
-- Menerapkan **Null Safety** secara ketat (tipe nullable `?` dan default value `null`) agar aplikasi tahan terhadap data API yang tidak lengkap.
-- Menyediakan *computed properties* pembantu seperti `imageUrl` (fallback bertingkat WebP/JPG) dan `scoreText` (format dua desimal).
+### Komponen Arsitektur:
 
-### 2. View (UI Layer)
-- Terletak di paket `ui.home`, `ui.detail`, `ui.components`, `ui.theme`, dan `ui.navigation`.
-- Dibangun 100% secara deklaratif menggunakan **Jetpack Compose** dan **Material Design 3**.
-- Bersifat **Stateless**: Composable hanya menerima `UiState` dari ViewModel dan meneruskan event interaksi pengguna ke atas (*State Hoisting*).
-- Menggunakan `collectAsStateWithLifecycle()` dari `androidx.lifecycle.runtime.compose` agar konsumsi state otomatis berhenti saat activity di latar belakang.
-- Penanganan status UI terisolasi rapi: `LoadingView` saat memuat data, `ErrorView` saat terjadi kegagalan jaringan beserta tombol *retry*, dan `EmptyView` jika pencarian tidak menemukan hasil.
+1. **Model (Data Layer)**:
+   - Terletak di `data/model/Anime.kt`.
+   - Menggunakan `data class` untuk memetakan respon JSON secara aman (*type-safe*).
+   - Menggunakan anotasi `@SerializedName` dari Gson.
+   - Menerapkan *Null Safety* dengan tipe nullable (`?`) dan fallback Elvis operator (`?:`) pada properti `imageUrl` dan `scoreText`.
 
-### 3. ViewModel (Business Logic & State Management)
-- Terletak di [`HomeViewModel.kt`](app/src/main/java/com/pemmob/responsikotlinshiftg/ui/home/HomeViewModel.kt) dan [`DetailViewModel.kt`](app/src/main/java/com/pemmob/responsikotlinshiftg/ui/detail/DetailViewModel.kt).
-- Menyimpan kondisi layar di dalam satu `HomeUiState` / `DetailUiState`.
-- Menerapkan enkapsulasi: `_uiState` berjenis `MutableStateFlow` bersifat privat, sedangkan antarmuka luar hanya membaca `uiState` bertipe `StateFlow` *read-only*.
-- Menjalankan operasi asinkron dalam cakupan `viewModelScope` sehingga seluruh proses otomatis dibatalkan jika ViewModel dihancurkan (*memory-leak proof*).
-- Pada `HomeViewModel`, pencarian dilengkapi mekanisme pembatalan job (`searchJob?.cancel()`) dan jeda `delay(500)` milidetik (*debounce*).
-- Pada `DetailViewModel`, parameter `animeId` diambil secara aman menggunakan `SavedStateHandle`.
+2. **Repository Layer**:
+   - Terletak di `data/repository/AnimeRepository.kt`.
+   - Mengabstraksi panggilan data jaringan dari ViewModel.
+   - Seluruh fungsi suspend dijalankan di latar belakang menggunakan `withContext(Dispatchers.IO)`.
+   - Menggunakan `runCatching` untuk mengembalikan tipe `Result<List<Anime>>` dan `Result<Anime>` secara aman tanpa crash.
 
-### 4. Repository (Data Abstraction Layer)
-- Terletak di [`AnimeRepository.kt`](app/src/main/java/com/pemmob/responsikotlinshiftg/data/repository/AnimeRepository.kt).
-- Berfungsi sebagai jembatan tunggal antara ViewModel dan sumber data jaringan Retrofit.
-- Mengeksekusi request jaringan di thread background menggunakan `withContext(Dispatchers.IO)`.
-- Membungkus respon dalam konstruksi `runCatching` yang mengembalikan tipe Kotlin `Result<T>` (`onSuccess` / `onFailure`).
+3. **ViewModel Layer**:
+   - `HomeViewModel.kt`: Mengelola `HomeUiState` (daftar anime, genre, filter terpilih, status loading, dan error). Menggunakan `searchJob?.cancel()` dan `delay(500)` untuk pencarian *debounce*.
+   - `DetailViewModel.kt`: Mengambil `animeId` dari Navigation Component via `SavedStateHandle` dan memuat rincian anime ke dalam `DetailUiState`.
+   - Seluruh state dibungkus dalam `StateFlow` yang bersifat *read-only* bagi UI.
+
+4. **View (UI Layer)**:
+   - `HomeScreen.kt` & `DetailScreen.kt`: Dibangun secara deklaratif dengan Jetpack Compose.
+   - Bersifat *stateless* dan bereaksi terhadap perubahan `uiState` via `collectAsStateWithLifecycle()`.
+   - Dilengkapi penanganan status terisolasi di `StateViews.kt`: `LoadingView`, `ErrorView` (dengan tombol *retry*), dan `EmptyView`.
+   - Navigasi antar-layar dikelola oleh `AppNavigation.kt` dengan maksimal 2 screen (*Home* dan *Detail*).
 
 ---
 
-## 🌐 Penjelasan Penggunaan API
+## 5. Penjelasan Penggunaan API
 
-Aplikasi AniKatsu memanfaatkan REST API publik modern dari **Tenrai API**:
+Aplikasi menggunakan layanan **Tenrai REST API** (REST API MyAnimeList yang cepat dan andal):
 
-- **Provider**: [Tenrai REST API](https://api.tenrai.org/)
 - **Base URL**: `https://api.tenrai.org/v1/`
-- **Format Respons**: JSON
 
-### 1. Endpoint yang Digunakan
+### Endpoint yang Digunakan:
 
-| No | Endpoint HTTP | Fungsi dalam Aplikasi | Letak Penggunaan |
-| :---: | :--- | :--- | :--- |
-| **1** | `GET /v1/anime` | Mengambil daftar katalog anime terpopuler, mendukung pencarian kata kunci (`?q={keyword}`) dan filter genre (`?genres={id}`). | `HomeViewModel.loadAnime()` |
-| **2** | `GET /v1/anime/{id}` | Mengambil detail lengkap satu anime berdasarkan ID unik (judul alternatif, episode, rating, durasi, musim, studio, sinopsis). | `DetailViewModel.loadDetail()` |
-| **3** | `GET /v1/genres/anime` | Mengambil daftar seluruh kategori genre anime untuk mengisi pilihan filter chip secara dinamis. | `HomeViewModel.loadGenres()` |
+1. **Katalog & Pencarian Anime**:
+   - `GET /anime?q={query}&genres={id}&order_by=popularity&sort=asc`
+   - Digunakan di `HomeScreen` untuk menampilkan anime populer, memfilter berdasarkan genre terpilih, dan mencari anime berdasarkan teks yang diketikkan pengguna.
 
-### 2. Implementasi Klien Jaringan (Retrofit & OkHttp)
-Konfigurasi klien jaringan terletak pada [`ApiClient.kt`](app/src/main/java/com/pemmob/responsikotlinshiftg/data/remote/ApiClient.kt):
-- **Singleton Pattern**: Menggunakan `object ApiClient` agar instance Retrofit hanya dibuat satu kali sepanjang aplikasi aktif.
-- **HttpLoggingInterceptor**: Dikonfigurasi dengan level `BODY` untuk mencatat request URL, header, serta payload body pada jendela Logcat selama proses *development*.
-- **Timeouts**: Mengonfigurasi `connectTimeout`, `readTimeout`, dan `writeTimeout` masing-masing 30 detik untuk mengantisipasi jaringan internet yang lambat.
-- **GsonConverterFactory**: Melakukan deserialisasi otomatis dari dokumen JSON ke objek data class Kotlin.
+2. **Detail Anime Berdasarkan ID**:
+   - `GET /anime/{id}`
+   - Digunakan di `DetailScreen` untuk mengambil rincian lengkap anime (skor, status, episode, durasi, musim, studio, dan sinopsis).
 
-### 3. Penanganan Galat Jaringan (Error Mapping)
-Terletak pada [`ErrorMapper.kt`](app/src/main/java/com/pemmob/responsikotlinshiftg/util/ErrorMapper.kt):
-- Menggunakan *Extension Function* `Throwable.toUserMessage()` untuk memetakan galat jaringan menjadi pesan ramah dalam Bahasa Indonesia:
-  - `IOException` -> Gangguan koneksi internet pengguna.
-  - HTTP 404 -> Anime tidak ditemukan.
-  - HTTP 429 -> Batas kuota request terlampaui (*Rate Limit*).
-  - HTTP 500-599 -> Server API sedang mengalami kendala.
+3. **Daftar Kategori Genre**:
+   - `GET /genres/anime`
+   - Digunakan untuk memuat daftar kategori genre secara dinamis ke dalam deretan *Filter Chips*.
+
+### Klien Jaringan (Retrofit & OkHttp):
+- Dikonfigurasi dalam `ApiClient.kt` menggunakan pola *Singleton*.
+- Dilengkapi `HttpLoggingInterceptor` (level `BODY`) untuk kemudahan monitoring trafik jaringan pada Logcat.
+- Pengaturan timeout jaringan: `connectTimeout`, `readTimeout`, dan `writeTimeout` selama 30 detik.
+- Menggunakan `ErrorMapper.kt` untuk menerjemahkan exception HTTP (404, 429, 500) dan galat koneksi internet (`IOException`) menjadi pesan ramah dalam Bahasa Indonesia.
 
 ---
 
-## ✨ Fitur Unggulan
-
-1. **Kotlin Features Modern**:
-   - *Data classes* ringkas dan *immutable*.
-   - *Null safety* dengan safe call operator (`?.`) dan Elvis operator (`?:`).
-   - *Extension functions* (`Throwable.toUserMessage()`).
-   - *Coroutines* & *Flow* untuk pemrograman asinkron non-blocking.
-2. **Desain Visual Material 3**:
-   - Palet warna custom gelap (*Midnight Slate*, *Coral Primary*, *Sunset Gold*).
-   - Tipografi elegan menggunakan font **Poppins** (`Regular`, `Medium`, `SemiBold`, `Bold`).
-   - Header detail sinematik dengan poster blur gradien dan kartu info melayang (*elevated cards*).
-   - Badge skor rating bernuansa emas dan tag genre responsif menggunakan `FlowRow`.
-3. **Pemuatan Gambar Asinkron**:
-   - Menggunakan pustaka **Coil Compose** (`AsyncImage`) dengan *caching* memori otomatis dan penyesuaian skala *ContentScale.Crop*.
-4. **Navigasi Maksimal 2 Layar**:
-   - Layar Utama (`HomeScreen`) menuju Layar Rincian (`DetailScreen`) menggunakan Jetpack Navigation Compose dengan argumen `NavType.IntType`.
-5. **Icon Aplikasi Kustom**:
-   - Icon aplikasi unik karakter anime pada seluruh resolusi `res/mipmap-*/` dan *adaptive icon* Android 8.0+.
-
----
-
-## 📂 Struktur Direktori Proyek
+## 6. Struktur File Proyek
 
 ```
 app/src/main/
-├── AndroidManifest.xml                        # Konfigurasi aplikasi & izin INTERNET
+├── AndroidManifest.xml
 ├── java/com/pemmob/responsikotlinshiftg/
-│   ├── MainActivity.kt                        # Entry point (enableEdgeToEdge & setContent)
+│   ├── MainActivity.kt
 │   ├── data/
 │   │   ├── model/
-│   │   │   └── Anime.kt                       # Data class model & response DTO
+│   │   │   └── Anime.kt
 │   │   ├── remote/
-│   │   │   ├── ApiClient.kt                   # Retrofit & OkHttpClient singleton
-│   │   │   └── TenraiApiService.kt            # Definisi endpoint Retrofit
+│   │   │   ├── ApiClient.kt
+│   │   │   └── TenraiApiService.kt
 │   │   └── repository/
-│   │       └── AnimeRepository.kt             # Repository pola data
+│   │       └── AnimeRepository.kt
 │   ├── ui/
 │   │   ├── components/
-│   │   │   ├── AnimeCard.kt                   # Komponen kartu anime grid
-│   │   │   └── StateViews.kt                  # Komponen Loading, Error, & Empty
+│   │   │   ├── AnimeCard.kt
+│   │   │   └── StateViews.kt
 │   │   ├── detail/
-│   │   │   ├── DetailScreen.kt                # UI Layar Detail anime
-│   │   │   └── DetailViewModel.kt             # ViewModel Layar Detail
+│   │   │   ├── DetailScreen.kt
+│   │   │   └── DetailViewModel.kt
 │   │   ├── home/
-│   │   │   ├── HomeScreen.kt                  # UI Layar Utama + Search & Filter
-│   │   │   └── HomeViewModel.kt               # ViewModel Layar Utama
+│   │   │   ├── HomeScreen.kt
+│   │   │   └── HomeViewModel.kt
 │   │   ├── navigation/
-│   │   │   └── AppNavigation.kt               # NavHost & rute navigasi
+│   │   │   └── AppNavigation.kt
 │   │   └── theme/
-│   │       ├── Color.kt                       # Palet warna Material 3
-│   │       ├── Theme.kt                       # Theme provider AniKatsu
-│   │       └── Type.kt                        # Konfigurasi Typography Poppins
+│   │       ├── Color.kt
+│   │       ├── Theme.kt
+│   │       └── Type.kt
 │   └── util/
-│       └── ErrorMapper.kt                     # Konversi error Throwable ke teks
+│       └── ErrorMapper.kt
 └── res/
-    ├── font/                                  # File font Poppins (Regular, Medium, SemiBold, Bold)
-    ├── mipmap-*/                              # Icon launcher aplikasi kustom
+    ├── font/
+    ├── mipmap-*/
     └── values/
-        └── strings.xml                        # String resource (app_name = "AniKatsu")
+        └── strings.xml
 ```
 
 ---
 
-## 🚀 Cara Menjalankan Aplikasi
+## 7. Cara Menjalankan Proyek
 
-1. **Clone atau Buka Proyek**: Buka folder repositori ini di **Android Studio** (Koala / Ladybug / versi terbaru).
-2. **Koneksi Internet**: Pastikan komputer terhubung ke internet untuk mendownload dependensi Gradle dan melakukan panggilan API.
-3. **Gradle Sync**: Tunggu proses *Gradle Project Sync* selesai.
-4. **Build Proyek**:
+1. **Buka Proyek**: Buka folder `ResponsiKotlinShiftG` di Android Studio.
+2. **Sinkronisasi Gradle**: Tunggu proses *Gradle Sync* selesai.
+3. **Kompilasi**:
    ```bash
    ./gradlew assembleDebug
    ```
-5. **Jalankan Aplikasi**: Pilih emulator Android (API level 24 ke atas) atau perangkat fisik via USB Debugging, lalu klik tombol **Run** (`Shift + F10`).
+4. **Jalankan Aplikasi**: Pilih emulator Android (API 24+) atau perangkat fisik, lalu klik tombol **Run** (`Shift + F10`).
