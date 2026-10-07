@@ -8,7 +8,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.pemmob.responsikotlinshiftg.R
 
-/** Custom Font Family: Poppins (file .ttf di res/font) */
 val Poppins = FontFamily(
     Font(R.font.poppins_regular, FontWeight.Normal),
     Font(R.font.poppins_medium, FontWeight.Medium),
@@ -17,7 +16,6 @@ val Poppins = FontFamily(
     Font(R.font.poppins_extrabold, FontWeight.ExtraBold)
 )
 
-/** Custom Typography Material Design 3 menggunakan Poppins */
 val Typography = Typography(
     displayLarge = TextStyle(fontFamily = Poppins, fontWeight = FontWeight.ExtraBold, fontSize = 52.sp, lineHeight = 60.sp, letterSpacing = (-1).sp),
     displayMedium = TextStyle(fontFamily = Poppins, fontWeight = FontWeight.ExtraBold, fontSize = 42.sp, lineHeight = 50.sp, letterSpacing = (-0.5).sp),

@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
-/** Custom Dark Color Scheme (Material Design 3) */
 private val DarkColorScheme = darkColorScheme(
     primary = SakuraPink,
     onPrimary = Color.White,
@@ -35,7 +34,6 @@ private val DarkColorScheme = darkColorScheme(
     onError = Night950
 )
 
-/** Custom Light Color Scheme (Material Design 3) */
 private val LightColorScheme = lightColorScheme(
     primary = SakuraPinkDark,
     onPrimary = Color.White,
@@ -60,7 +58,6 @@ private val LightColorScheme = lightColorScheme(
     onError = Color.White
 )
 
-/** Custom Shapes */
 val AppShapes = Shapes(
     extraSmall = RoundedCornerShape(6.dp),
     small = RoundedCornerShape(10.dp),
@@ -69,10 +66,6 @@ val AppShapes = Shapes(
     extraLarge = RoundedCornerShape(32.dp)
 )
 
-/**
- * Custom Theme aplikasi AniKatsu.
- * Dynamic color sengaja tidak digunakan agar identitas warna aplikasi tetap konsisten.
- */
 @Composable
 fun ResponsiKotlinShiftGTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),

@@ -34,10 +34,6 @@ import coil.compose.AsyncImage
 import com.pemmob.responsikotlinshiftg.data.model.Anime
 import com.pemmob.responsikotlinshiftg.ui.theme.SunsetGold
 
-/**
- * Item anime pada grid Home Screen.
- * Menampilkan: poster, Judul anime, Tipe anime, dan Rating (score).
- */
 @Composable
 fun AnimeCard(
     anime: Anime,
@@ -64,7 +60,6 @@ fun AnimeCard(
                     .fillMaxSize()
                     .background(MaterialTheme.colorScheme.surfaceVariant)
             )
-            // Gradient bawah agar badge terbaca
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -76,14 +71,12 @@ fun AnimeCard(
                         )
                     )
             )
-            // Rating badge
             RatingBadge(
                 score = anime.scoreText,
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(8.dp)
             )
-            // Tipe anime badge
             Surface(
                 color = MaterialTheme.colorScheme.primary,
                 shape = RoundedCornerShape(8.dp),

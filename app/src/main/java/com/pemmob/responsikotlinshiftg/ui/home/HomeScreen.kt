@@ -49,16 +49,11 @@ import com.pemmob.responsikotlinshiftg.ui.components.EmptyView
 import com.pemmob.responsikotlinshiftg.ui.components.ErrorView
 import com.pemmob.responsikotlinshiftg.ui.components.LoadingView
 
-/**
- * HOME SCREEN (stateful)
- * Mengambil state dari HomeViewModel. Composable TIDAK memanggil API secara langsung.
- */
 @Composable
 fun HomeScreen(
     onAnimeClick: (Int) -> Unit,
     viewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory)
 ) {
-    // collectAsStateWithLifecycle -> setiap state berubah, Compose melakukan recomposition
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     HomeContent(
@@ -72,9 +67,6 @@ fun HomeScreen(
     )
 }
 
-/**
- * HOME CONTENT (stateless) - hanya menerima state & lambda event.
- */
 @Composable
 fun HomeContent(
     uiState: HomeUiState,
@@ -106,7 +98,6 @@ fun HomeContent(
                 onGenreSelected = onGenreSelected
             )
 
-            // State-driven UI: tampilan ditentukan oleh nilai state
             Box(modifier = Modifier.fillMaxSize()) {
                 when {
                     uiState.isLoading -> LoadingView()
@@ -125,7 +116,6 @@ fun HomeContent(
 @Composable
 private fun HomeHeader() {
     Column(modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 16.dp, bottom = 8.dp)) {
-        // Judul aplikasi
         Text(
             text = buildAnnotatedString {
                 append("Ani")
@@ -151,7 +141,6 @@ private fun HomeHeader() {
     }
 }
 
-/** Search bar pencarian anime berdasarkan judul */
 @Composable
 private fun AnimeSearchBar(
     query: String,
@@ -193,7 +182,6 @@ private fun AnimeSearchBar(
     )
 }
 
-/** Filter berdasarkan genre */
 @Composable
 private fun GenreFilterRow(
     genres: List<Genre>,
@@ -238,7 +226,6 @@ private fun GenreChip(label: String, selected: Boolean, onClick: () -> Unit) {
     )
 }
 
-/** Daftar anime menggunakan LazyVerticalGrid */
 @Composable
 private fun AnimeGrid(uiState: HomeUiState, onAnimeClick: (Int) -> Unit) {
     LazyVerticalGrid(

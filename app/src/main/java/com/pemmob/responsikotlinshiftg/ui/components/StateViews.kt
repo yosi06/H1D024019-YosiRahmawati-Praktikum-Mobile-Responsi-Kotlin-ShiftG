@@ -22,7 +22,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
-/** Tampilan saat state Loading = true */
 @Composable
 fun LoadingView(modifier: Modifier = Modifier, message: String = "Memuat anime...") {
     Column(
@@ -40,7 +39,6 @@ fun LoadingView(modifier: Modifier = Modifier, message: String = "Memuat anime..
     }
 }
 
-/** Tampilan saat state Error != null */
 @Composable
 fun ErrorView(
     message: String,
@@ -82,7 +80,6 @@ fun ErrorView(
     }
 }
 
-/** Tampilan saat hasil pencarian kosong */
 @Composable
 fun EmptyView(query: String, modifier: Modifier = Modifier) {
     Column(

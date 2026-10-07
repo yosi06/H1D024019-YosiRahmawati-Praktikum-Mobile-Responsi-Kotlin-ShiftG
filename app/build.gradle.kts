@@ -47,25 +47,14 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
-    // MVVM - ViewModel & State untuk Compose
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
-
-    // Navigation Compose
     implementation(libs.androidx.navigation.compose)
-
-    // Material Icons
     implementation(libs.androidx.compose.material.icons.core)
-
-    // Networking - Retrofit + Gson + OkHttp Logging
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.okhttp.logging)
-
-    // Coroutines
     implementation(libs.kotlinx.coroutines.android)
-
-    // Image loading
     implementation(libs.coil.compose)
 
     testImplementation(libs.junit)

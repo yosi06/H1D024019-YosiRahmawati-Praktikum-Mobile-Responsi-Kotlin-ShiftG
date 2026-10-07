@@ -9,7 +9,6 @@ import androidx.navigation.navArgument
 import com.pemmob.responsikotlinshiftg.ui.detail.DetailScreen
 import com.pemmob.responsikotlinshiftg.ui.home.HomeScreen
 
-/** Definisi route untuk 2 screen aplikasi */
 sealed class Screen(val route: String) {
     data object Home : Screen("home")
     data object Detail : Screen("detail/{animeId}") {
@@ -18,9 +17,6 @@ sealed class Screen(val route: String) {
     }
 }
 
-/**
- * NavHost aplikasi: Home Screen -> Detail Screen (maksimal 2 screen).
- */
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()

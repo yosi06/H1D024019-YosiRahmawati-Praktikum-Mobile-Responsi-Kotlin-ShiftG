@@ -7,20 +7,10 @@ import com.pemmob.responsikotlinshiftg.data.remote.TenraiApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-/**
- * REPOSITORY LAYER
- * Menjadi satu-satunya sumber data (single source of truth) bagi ViewModel.
- * ViewModel tidak tahu data berasal dari mana (API), cukup memanggil fungsi repository.
- * Hasil dibungkus dalam Result<T> agar sukses/gagal dapat ditangani dengan aman.
- */
 class AnimeRepository(
     private val apiService: TenraiApiService = ApiClient.apiService
 ) {
 
-    /**
-     * Mencari anime berdasarkan judul (query) dan genre (opsional).
-     * Bila query kosong & tanpa genre -> tampilkan anime terpopuler.
-     */
     suspend fun searchAnime(query: String, genreId: Int?): Result<List<Anime>> =
         withContext(Dispatchers.IO) {
             runCatching {
@@ -34,12 +24,10 @@ class AnimeRepository(
                 } else {
                     apiService.searchAnime(query = trimmed, genres = genreId)
                 }
-                // Collection: hapus duplikat berdasarkan mal_id
                 response.data.orEmpty().distinctBy { it.malId }
             }
         }
 
-    /** Mengambil detail anime berdasarkan mal_id */
     suspend fun getAnimeDetail(id: Int): Result<Anime> =
         withContext(Dispatchers.IO) {
             runCatching {
@@ -48,7 +36,6 @@ class AnimeRepository(
             }
         }
 
-    /** Mengambil daftar genre, diurutkan berdasarkan nama */
     suspend fun getGenres(): Result<List<Genre>> =
         withContext(Dispatchers.IO) {
             runCatching {

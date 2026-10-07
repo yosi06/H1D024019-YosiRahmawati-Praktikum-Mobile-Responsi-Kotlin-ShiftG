@@ -17,24 +17,15 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-/**
- * UI State untuk Home Screen.
- * Setiap perubahan nilai pada state ini akan memicu RECOMPOSITION pada UI.
- */
 data class HomeUiState(
-    val query: String = "",                  // State: query pencarian
-    val animeList: List<Anime> = emptyList(), // State: data hasil pencarian
-    val isLoading: Boolean = false,          // State: loading
-    val errorMessage: String? = null,        // State: error
-    val genres: List<Genre> = emptyList(),   // State: daftar genre untuk filter
-    val selectedGenre: Genre? = null         // State: genre yang dipilih
+    val query: String = "",
+    val animeList: List<Anime> = emptyList(),
+    val isLoading: Boolean = false,
+    val errorMessage: String? = null,
+    val genres: List<Genre> = emptyList(),
+    val selectedGenre: Genre? = null
 )
 
-/**
- * VIEWMODEL LAYER - HomeViewModel
- * Menyimpan & mengelola state Home Screen, memanggil Repository di dalam Coroutine
- * (viewModelScope). Composable hanya mengamati state & mengirim event.
- */
 class HomeViewModel(
     private val repository: AnimeRepository
 ) : ViewModel() {
@@ -49,28 +40,24 @@ class HomeViewModel(
         searchAnime()
     }
 
-    /** Dipanggil setiap kali user mengetik di search bar (dengan debounce 600ms) */
     fun onQueryChange(newQuery: String) {
         _uiState.update { it.copy(query = newQuery) }
         searchJob?.cancel()
         searchJob = viewModelScope.launch {
-            delay(600L) // debounce agar tidak spam request ke API
+            delay(600L)
             performSearch()
         }
     }
 
-    /** Dipanggil ketika user menekan tombol search pada keyboard */
     fun onSearch() {
         searchAnime()
     }
 
-    /** Menghapus query pencarian */
     fun onClearQuery() {
         _uiState.update { it.copy(query = "") }
         searchAnime()
     }
 
-    /** Memilih / membatalkan filter genre (null = Semua genre) */
     fun onGenreSelected(genre: Genre?) {
         val current = _uiState.value.selectedGenre
         val newGenre = if (genre?.malId == current?.malId) null else genre
@@ -78,7 +65,6 @@ class HomeViewModel(
         searchAnime()
     }
 
-    /** Mencoba ulang ketika terjadi error */
     fun retry() {
         if (_uiState.value.genres.isEmpty()) loadGenres()
         searchAnime()
@@ -114,7 +100,6 @@ class HomeViewModel(
     }
 
     companion object {
-        /** Factory untuk membuat HomeViewModel beserta dependensinya (Repository) */
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer { HomeViewModel(AnimeRepository()) }
         }

@@ -52,10 +52,6 @@ import com.pemmob.responsikotlinshiftg.ui.components.ErrorView
 import com.pemmob.responsikotlinshiftg.ui.components.LoadingView
 import com.pemmob.responsikotlinshiftg.ui.theme.SunsetGold
 
-/**
- * DETAIL SCREEN (stateful)
- * Menampilkan: Judul, Genre, Rating, Jumlah episode, Status, dan Sinopsis.
- */
 @Composable
 fun DetailScreen(
     onBack: () -> Unit,
@@ -70,7 +66,6 @@ fun DetailScreen(
     )
 }
 
-/** DETAIL CONTENT (stateless) */
 @Composable
 fun DetailContent(
     uiState: DetailUiState,
@@ -95,7 +90,6 @@ fun DetailContent(
                 )
             }
 
-            // Tombol kembali
             FilledIconButton(
                 onClick = onBack,
                 modifier = Modifier
@@ -120,7 +114,6 @@ private fun AnimeDetailBody(anime: Anime, bottomPadding: androidx.compose.ui.uni
             .verticalScroll(rememberScrollState())
             .padding(bottom = bottomPadding + 24.dp)
     ) {
-        // ===== Header: banner blur + poster =====
         Box(modifier = Modifier.fillMaxWidth().height(340.dp)) {
             AsyncImage(
                 model = anime.imageUrl,
@@ -159,7 +152,6 @@ private fun AnimeDetailBody(anime: Anime, bottomPadding: androidx.compose.ui.uni
                 )
                 Spacer(Modifier.width(16.dp))
                 Column(modifier = Modifier.padding(bottom = 4.dp)) {
-                    // Judul anime
                     Text(
                         text = anime.title ?: "Tanpa Judul",
                         style = MaterialTheme.typography.headlineSmall,
@@ -191,7 +183,6 @@ private fun AnimeDetailBody(anime: Anime, bottomPadding: androidx.compose.ui.uni
 
         Spacer(Modifier.height(36.dp))
 
-        // ===== Info: Rating, Episode, Status =====
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -223,7 +214,6 @@ private fun AnimeDetailBody(anime: Anime, bottomPadding: androidx.compose.ui.uni
 
         Spacer(Modifier.height(20.dp))
 
-        // ===== Genre =====
         SectionTitle("Genre")
         FlowRow(
             modifier = Modifier.padding(horizontal = 20.dp),
@@ -251,7 +241,6 @@ private fun AnimeDetailBody(anime: Anime, bottomPadding: androidx.compose.ui.uni
 
         Spacer(Modifier.height(20.dp))
 
-        // ===== Informasi tambahan =====
         SectionTitle("Informasi")
         Card(
             modifier = Modifier
@@ -274,7 +263,6 @@ private fun AnimeDetailBody(anime: Anime, bottomPadding: androidx.compose.ui.uni
 
         Spacer(Modifier.height(20.dp))
 
-        // ===== Sinopsis =====
         SectionTitle("Sinopsis")
         Text(
             text = anime.synopsis?.takeIf { it.isNotBlank() } ?: "Sinopsis belum tersedia.",

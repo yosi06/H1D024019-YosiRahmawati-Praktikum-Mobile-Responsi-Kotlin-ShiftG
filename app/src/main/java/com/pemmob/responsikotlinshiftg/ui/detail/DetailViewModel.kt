@@ -17,20 +17,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-/**
- * UI State untuk Detail Screen.
- */
 data class DetailUiState(
-    val isLoading: Boolean = false,   // State: loading
-    val anime: Anime? = null,         // State: data detail
-    val errorMessage: String? = null  // State: error
+    val isLoading: Boolean = false,
+    val anime: Anime? = null,
+    val errorMessage: String? = null
 )
 
-/**
- * VIEWMODEL LAYER - DetailViewModel
- * Mengambil mal_id dari argumen navigasi (SavedStateHandle), lalu memuat detail anime
- * dari Repository menggunakan endpoint GET /anime/{id}.
- */
 class DetailViewModel(
     savedStateHandle: SavedStateHandle,
     private val repository: AnimeRepository

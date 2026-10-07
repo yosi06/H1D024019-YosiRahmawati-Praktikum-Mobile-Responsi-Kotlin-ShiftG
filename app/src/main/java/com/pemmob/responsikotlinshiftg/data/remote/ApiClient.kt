@@ -6,9 +6,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-/**
- * Singleton (object) penyedia instance Retrofit untuk Tenrai API.
- */
 object ApiClient {
 
     private const val BASE_URL = "https://api.tenrai.org/v1/"
@@ -23,7 +20,6 @@ object ApiClient {
         .readTimeout(30, TimeUnit.SECONDS)
         .build()
 
-    /** lazy: instance hanya dibuat saat pertama kali diakses */
     val apiService: TenraiApiService by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
