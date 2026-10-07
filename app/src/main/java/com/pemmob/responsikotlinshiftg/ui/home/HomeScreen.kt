@@ -128,7 +128,7 @@ private fun HomeHeader() {
         // Judul aplikasi
         Text(
             text = buildAnnotatedString {
-                append("Pipit")
+                append("Ani")
                 withStyle(
                     SpanStyle(
                         brush = Brush.horizontalGradient(
@@ -138,13 +138,13 @@ private fun HomeHeader() {
                             )
                         )
                     )
-                ) { append("Nime") }
+                ) { append("Katsu") }
             },
             style = MaterialTheme.typography.headlineLarge,
             color = MaterialTheme.colorScheme.onBackground
         )
         Text(
-            text = "Cari anime favoritmu bareng Pipit ✨",
+            text = "Temukan & jelajahi anime favoritmu ✨",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )

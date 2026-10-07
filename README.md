@@ -1,6 +1,6 @@
-# PipitNime - Aplikasi Pencarian Anime
+# AniKatsu - Aplikasi Pencarian Anime
 
-Aplikasi mobile berbasis **Android** yang dikembangkan menggunakan **Kotlin**, **Jetpack Compose**, **Material Design 3**, **Navigation Component**, dan **Arsitektur MVVM (Model-View-ViewModel)**. Aplikasi ini memungkinkan pengguna (Pipit & kawan-kawan) untuk mencari katalog anime, memfilter berdasarkan genre, serta melihat informasi detail anime secara dinamis dari **Tenrai REST API** (`https://api.tenrai.org/v1/`).
+Aplikasi mobile berbasis **Android** yang dikembangkan menggunakan **Kotlin**, **Jetpack Compose**, **Material Design 3**, **Navigation Component**, dan **Arsitektur MVVM (Model-View-ViewModel)**. Aplikasi ini memungkinkan pengguna untuk mencari katalog anime, memfilter berdasarkan genre, serta melihat informasi detail anime secara dinamis dari **Tenrai REST API** (`https://api.tenrai.org/v1/`).
 
 ---
 
@@ -37,7 +37,7 @@ Aplikasi mobile berbasis **Android** yang dikembangkan menggunakan **Kotlin**, *
    - Navigasi antar-layar menggunakan Jetpack Compose Navigation via argumen `mal_id`.
 
 6. **Icon Aplikasi Kustom**
-   - Icon default Android telah diganti dengan karakter chibi anime (Pipit dengan jepit burung pipit) pada seluruh densitas `mipmap` (mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi) serta adaptive icon Android 8.0+.
+   - Icon default Android telah diganti dengan karakter chibi anime pada seluruh densitas `mipmap` (mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi) serta adaptive icon Android 8.0+.
 
 ---
 
@@ -158,9 +158,9 @@ app/src/main/
 │       └── ErrorMapper.kt               <-- Konversi error ke bahasa Indonesia
 └── res/
     ├── font/                            <-- Poppins font files
-    ├── mipmap-*/                        <-- Custom app icon (Pipit Anime)
+    ├── mipmap-*/                        <-- Custom app icon (Anime Character)
     └── values/
-        └── strings.xml                  <-- App name "PipitNime"
+        └── strings.xml                  <-- App name "AniKatsu"
 ```
 
 ---

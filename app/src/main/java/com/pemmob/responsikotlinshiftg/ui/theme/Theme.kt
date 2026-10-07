@@ -70,7 +70,7 @@ val AppShapes = Shapes(
 )
 
 /**
- * Custom Theme aplikasi PipitNime.
+ * Custom Theme aplikasi AniKatsu.
  * Dynamic color sengaja tidak digunakan agar identitas warna aplikasi tetap konsisten.
  */
 @Composable

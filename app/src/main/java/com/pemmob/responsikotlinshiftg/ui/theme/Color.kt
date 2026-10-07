@@ -2,7 +2,7 @@ package com.pemmob.responsikotlinshiftg.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// ===== Palet warna kustom "PipitNime" (Sakura Pink x Midnight Violet) =====
+// ===== Palet warna kustom "AniKatsu" (Sakura Pink x Midnight Violet) =====
 
 // Brand
 val SakuraPink = Color(0xFFFF5C8A)
